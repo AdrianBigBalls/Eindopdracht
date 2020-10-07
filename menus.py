@@ -18,22 +18,27 @@ def print_menu():
 def print_list():
     for i in myList:
         print("* ", i)
-    choice = input("Press M to enter the menu")
+    choice = input("Press M to go back the menu")
     if choice == "m" or choice == "M":
         print_menu()
-
+    else:
+        exit("Invalid choice, quitting....")
 
 def add_item():
-    print("**** Add Item ****\n")
+    print("      **** Add Item ****")
     item = input("Enter an item to add to your list: ")
     myList.append(item)
     print("You added " + item + " to your list")
     print_menu()
 
 def delete_item():
-    print("**** Delete Item ****\n")
-    for (i, x) in enumerate(myList):
-        print(i, x)
-    item = int(input("Select an index number to delete: "))
-    myList.pop(item)
-    print_menu()
+    print("     **** Delete Item ****\nSelect an index number to delete: ")
+    if len(myList) > 0:
+        for (i, x) in enumerate(myList):
+            print(i, x)
+        item = int(input())
+        myList.pop(item)
+        print_menu()
+    else:
+        print("NO ITEMS TO DELETE! - Returning.")
+        print_menu()
