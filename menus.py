@@ -28,7 +28,7 @@ def add_item():
     print("      **** Add Item ****")
     item = input("Enter an item to add to your list: ")
     myList.append(item)
-    print("You added " + item + " to your list")
+    print("  You added " + item + " to your list\n")
     print_menu()
 
 def delete_item():
