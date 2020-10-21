@@ -1,3 +1,5 @@
+import database
+
 myList = []
 
 def print_menu():
@@ -10,14 +12,19 @@ def print_menu():
     elif choice == 3:
         delete_item()
     elif choice == 4:
-        exit()
+        return
     else:
-        print("Not a valid choice, exitting...")
+        print("Not a valid choice, exiting...")
         exit()
 
 def print_list():
-    for i in myList:
-        print("* ", i)
+
+    if len(myList) > 0:
+        for i in myList:
+            print("* ", i)
+    else:
+        print("Your list is empty. Returning\n\n")
+        print_menu()
     choice = input("Press M to go back the menu")
     if choice == "m" or choice == "M":
         print_menu()
@@ -28,6 +35,7 @@ def add_item():
     print("      **** Add Item ****")
     item = input("Enter an item to add to your list: ")
     myList.append(item)
+    database.write()
     print("  You added " + item + " to your list\n")
     print_menu()
 

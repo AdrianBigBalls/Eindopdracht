@@ -1,5 +1,6 @@
 # Eindopdracht Adrian
 import menus
+import database
 
 print("**** Reminder List ****")
 userName = input("please enter your username:")
@@ -10,3 +11,5 @@ if userName == "":
 print("Welcome " + userName + ", please make a choice in the menu:")
 
 menus.print_menu()
+database.write()
+database.read()
