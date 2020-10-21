@@ -1,0 +1,5 @@
+L = [['Adrian', 'kat', 'hond', 'cavia', 'muis'], ['Noortje', 'pinguins', 'paarden', 'bijen']]
+
+R = [[t[0] for t in l] for l in L]
+
+print(R)
