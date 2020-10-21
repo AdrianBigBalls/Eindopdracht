@@ -10,6 +10,7 @@ if userName == "":
 
 print("Welcome " + userName + ", please make a choice in the menu:")
 
-menus.print_menu()
-database.write()
 database.read()
+menus.print_menu()
+#database.write()
+

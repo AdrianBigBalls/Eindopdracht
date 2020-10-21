@@ -18,10 +18,16 @@ def read():
                     print("starts with a hashtag")
                     item = item[1:][:-1]
                     userList.append(item)
-                    print(userList)
+
                 elif item.startswith('%'):
                     print("found a Percentage sign")
+                    menus.myList.append(userList.copy())
+                    userList.clear()
+
                 else:
-                    print("Found an item")
+                    print("Found an item " + item)
+                    item = item[:-1]
+                    userList.append(item)
         else:
             print("cant read file!!")
+    return menus.myList

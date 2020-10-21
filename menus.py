@@ -1,6 +1,7 @@
 import database
 
 myList = []
+mainList = []
 
 def print_menu():
     print(" 1 - Print list\n 2 - Add to list\n 3 - Delete from list\n 4 - Quit")
