@@ -1,5 +1,5 @@
 # Eindopdracht Adrian
-
+import datetime
 
 
 print("**** Reminder List ****")
@@ -7,7 +7,6 @@ userName = input("please enter your username:")
 if userName == "":
     exit("Username not entered, exiting the program...")
 
-#print("Welcome " + userName + ", please make a choice in the menu:")
 currentUserIndex = 0
 mainList = []
 myList = []
@@ -50,7 +49,10 @@ def find_userlist():
     global myList
     global currentUserIndex
     userFound = False
-    print("*** Welcome " + userName + " ****")
+    now = datetime.datetime.now()
+    print("\n\n\n  **** Welcome " + userName + " ****")
+    print ("The current time and date is: ")
+    print(now.strftime("    %Y-%m-%d %H:%M:%S"))
     for (user_index, x) in enumerate(mainList):
         print(mainList[user_index][0])
         if mainList[user_index][0] == userName:
@@ -73,7 +75,8 @@ def save_list():
 
 
 def print_menu():
-    print(" 1 - Print list\n 2 - Add to list\n 3 - Delete from list\n 4 - Save list\n 5 - Quit")
+    print("\nChoose one of the following options:\n")
+    print("  1 - Print list\n  2 - Add to list\n  3 - Delete from list\n  4 - Save list\n  5 - Quit")
     choice = int(input())
     if choice == 1:
         print_list()
@@ -122,9 +125,6 @@ def delete_item():
     else:
         print("NO ITEMS TO DELETE! - Returning.")
         print_menu()
-
-
-
 
 read()
 find_userlist()
