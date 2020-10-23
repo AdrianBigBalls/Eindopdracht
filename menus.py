@@ -1,11 +1,9 @@
 import database
-
-
 myList = []
 
 
 def print_menu():
-    print(" 1 - Print list\n 2 - Add to list\n 3 - Delete from list\n 4 - Quit")
+    print(" 1 - Print list\n 2 - Add to list\n 3 - Delete from list\n 4- Save list\n 5 - Quit")
     choice = int(input())
     if choice == 1:
         print_list()
@@ -14,6 +12,8 @@ def print_menu():
     elif choice == 3:
         delete_item()
     elif choice == 4:
+        save_list()
+    elif choice == 5:
         return
     else:
         print("Not a valid choice, exiting...")
@@ -37,9 +37,10 @@ def add_item():
     print("      **** Add Item ****")
     item = input("Enter an item to add to your list: ")
     myList.append(item)
-    database.write()
+    #database.write()
     print("  You added " + item + " to your list\n")
     print_menu()
+
 
 def delete_item():
     print("     **** Delete Item ****\nSelect an index number to delete: ")
@@ -52,5 +53,8 @@ def delete_item():
     else:
         print("NO ITEMS TO DELETE! - Returning.")
         print_menu()
+
+
+
 
 

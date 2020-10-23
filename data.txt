@@ -3,6 +3,7 @@ kat
 hond
 cavia
 muis
+vleermuis
 %
 #Noortje
 pinguins
