@@ -1,82 +1,84 @@
-# Eindopdracht Adrian
+# Adrian Overdijk - ID1G4a.
+# With this program you will be able to store a list and save it to a file.
+# The lists are stored and loaded per individual user.
+# It also has a simple calculator functionality
 import datetime
+from operator import pow, truediv, mul, add, sub
 
-
+# Start of program, username is required.
 print("**** Reminder List ****")
-userName = input("please enter your username:")
-if userName == "":
+user_name = input("please enter your username:")
+if user_name == "":
     exit("Username not entered, exiting the program...")
 
-currentUserIndex = 0
-mainList = []
-myList = []
-
-def write():
-    with open('data.txt', 'w+') as file:
-        if not file.closed:
-            for (userindex, x) in enumerate(mainList):
-                for (listindex, y) in enumerate(mainList[userindex]):
-                    if listindex == 0:
-                        file.write('#' + mainList[userindex][listindex] + '\n')
-                    else:
-                        file.write(mainList[userindex][listindex] + '\n')
-                file.write('%' + '\n')
-        else:
-            print("cant write in file!!")
+current_user_index = 0
+main_list = []
+my_list = []
 
 
+# Reads data.txt into user_list until % is seen. Then user_list is read into main_list as a nested list.
+# This results in a nested list per user in main_list.
 def read():
-    userList = []
+    user_list = []
     with open('data.txt', 'r') as file:
         if not file.closed:
             for item in file:
                 if item.startswith('#'):
                     item = item[1:][:-1]
-                    userList.append(item)
-
+                    user_list.append(item)
                 elif item.startswith('%'):
-                    mainList.append(userList.copy())
-                    userList.clear()
-
+                    main_list.append(user_list.copy())
+                    user_list.clear()
                 else:
                     item = item[:-1]
-                    userList.append(item)
+                    user_list.append(item)
         else:
             print("cant read file!!")
 
 
+# This function displays a welcome message with the current time and date.
+# It also loops through main_list and compares user_name with the first element of each nested list.
+# When it finds an existing user, it reads corresponding nested list from main_list to my_list.
+# If it doesn't find a registered user_name it will create a new user in my_list.
 def find_userlist():
-    global myList
-    global currentUserIndex
-    userFound = False
+    global my_list
+    global current_user_index
+    user_found = False
     now = datetime.datetime.now()
-    print("\n\n\n  **** Welcome " + userName + " ****")
-    print ("The current time and date is: ")
+    print("\n\n  **** Welcome " + user_name + " ****")
+    print("The current time and date is: ")
     print(now.strftime("    %Y-%m-%d %H:%M:%S"))
-    for (user_index, x) in enumerate(mainList):
-        print(mainList[user_index][0])
-        if mainList[user_index][0] == userName:
-            print("user found: " + mainList[user_index][0])
-            myList = mainList[user_index]
-            currentUserIndex = user_index
-            userFound = True
+    for (user_index, x) in enumerate(main_list):
+        if main_list[user_index][0] == user_name:
+            my_list = main_list[user_index]
+            current_user_index = user_index
+            user_found = True
             break
 
-    if not userFound:
-        myList.append(userName)
-        mainList.append(myList)
-        currentUserIndex = (len(mainList) - 1)
+    if not user_found:
+        my_list.append(user_name)
+        main_list.append(my_list)
+        current_user_index = (len(main_list) - 1)
 
 
-def save_list():
-    print("Saving the list....")
-    mainList[currentUserIndex] = myList
-    print_menu()
+def write():
+    with open('data.txt', 'w+') as file:
+        if not file.closed:
+            for (userindex, x) in enumerate(main_list):
+                for (listindex, y) in enumerate(main_list[userindex]):
+                    if listindex == 0:
+                        file.write('#' + main_list[userindex][listindex] + '\n')
+                    else:
+                        file.write(main_list[userindex][listindex] + '\n')
+                file.write('%' + '\n')
+        else:
+            print("cant write in file!!")
 
 
 def print_menu():
-    print("\nChoose one of the following options:\n")
-    print("  1 - Print list\n  2 - Add to list\n  3 - Delete from list\n  4 - Save list\n  5 - Quit")
+    print("\n      **** Main menu ****\nChoose one of the following options:\n")
+    print("  1 - Print list\n  2 - Add to list\n  3 - Delete from list")
+    print("  4 - Save list\n  5 - Calculator\n  6 - Exit program")
     choice = int(input())
     if choice == 1:
         print_list()
@@ -87,15 +89,17 @@ def print_menu():
     elif choice == 4:
         save_list()
     elif choice == 5:
+        calculator()
+    elif choice == 6:
         return
     else:
         print("Not a valid choice, exiting...")
         exit()
 
-def print_list():
 
-    if len(myList) > 0:
-        for i in myList:
+def print_list():
+    if len(my_list) > 0:
+        for i in sorted(my_list):
             print("* ", i)
     else:
         print("Your list is empty. Returning\n\n")
@@ -106,30 +110,62 @@ def print_list():
     else:
         exit("Invalid choice, quitting....")
 
+
 def add_item():
     print("      **** Add Item ****")
-    item = input("Enter an item to add to your list: ")
-    myList.append(item)
+    item = input("Enter an item to add to your list.\nStart with the date YYYY-MM-DD followed by a whitespace: ")
+    my_list.append(item)
     print("  You added " + item + " to your list\n")
     print_menu()
 
 
 def delete_item():
     print("     **** Delete Item ****\nSelect an index number to delete: ")
-    if len(myList) > 0:
-        for (i, x) in enumerate(myList):
+    if len(my_list) > 0:
+        for (i, x) in enumerate(my_list):
             print(i, x)
         item = int(input())
-        myList.pop(item)
+        my_list.pop(item)
         print_menu()
     else:
         print("NO ITEMS TO DELETE! - Returning.")
         print_menu()
 
+
+def save_list():
+    print("Saving the list....")
+    main_list[current_user_index] = my_list
+    print_menu()
+
+
+######################################
+operators = {
+    '+': add,
+    '-': sub,
+    '*': mul,
+    '/': truediv,
+    '^': pow
+}
+
+
+def calculate(s):
+    if s.isdigit():
+        return float(s)
+    for c in operators.keys():
+        left, operator, right = s.partition(c)
+        if operator in operators:
+            return operators[operator](calculate(left), calculate(right))
+
+
+def calculator():
+    calc = input("**** CALCULATOR ****\nType calculation:\n")
+    print("Answer: " + str(calculate(calc)))
+    print_menu()
+
+
+##################################
+
 read()
 find_userlist()
 print_menu()
 write()
-
-#print(database.mainList[0][0])
-#menus.print_menu()
