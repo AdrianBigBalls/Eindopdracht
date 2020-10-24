@@ -4,7 +4,7 @@ Als eindopdracht maak ik een reminderlijst.
 Hierin kunnen reminders worden ingevoerd op datum. De reminders kunnen worden getoond op het scherm in volgorde van deadlinedatum. 
 Het programma laat een menu zien met keuzes als: Nieuwe reminder aanmaken, toon reminders, bewerk reminder en verwijder reminder.
 Het programma kan voor verschillende gebruikers een lijst opslaan. Als een gebruiker nog niet bestaat, wordt deze aangemaakt bij het invoeren van een nieuwe gebruikersnaam.
-Ik heb ook een calculator toegevoegd als functionaliteit.
+Ik heb ook een calculator toegevoegd als functionaliteit. Deze gebruikt hele getallen om floats als resultaat te geven.
 
 Allerlei extra functies kunnen worden toegevoegd, als het nodig mocht zijn. 
 Met dit programma kunnen alle eigenschappen van de minimale eisen worden gehaald:

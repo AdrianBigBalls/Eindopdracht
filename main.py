@@ -1,7 +1,6 @@
 # Adrian Overdijk - ID1G4a.
 # With this program you will be able to store a list and save it to a file.
-# The lists are stored and loaded per individual user.
-# It also has a simple calculator functionality
+# The lists are stored and loaded per individual user. It also has a simple calculator functionality.
 import datetime
 from operator import pow, truediv, mul, add, sub
 
@@ -11,12 +10,12 @@ user_name = input("please enter your username:")
 if user_name == "":
     exit("Username not entered, exiting the program...")
 
-current_user_index = 0
-main_list = []
-my_list = []
+current_user_index = 0  # Is used in save_list() to store my_list in main_list
+main_list = []  # List with all data of all users.
+my_list = []  # List with all data of the current user.
 
 
-# Reads data.txt into user_list until % is seen. Then user_list is read into main_list as a nested list.
+# Read() reads data.txt into user_list until % is seen. Then user_list is read into main_list as a nested list.
 # This results in a nested list per user in main_list.
 def read():
     user_list = []
@@ -48,19 +47,22 @@ def find_userlist():
     print("\n\n  **** Welcome " + user_name + " ****")
     print("The current time and date is: ")
     print(now.strftime("    %Y-%m-%d %H:%M:%S"))
-    for (user_index, x) in enumerate(main_list):
+    for (user_index, x) in enumerate(main_list):  # Loop to compare user_name with first elements.
         if main_list[user_index][0] == user_name:
             my_list = main_list[user_index]
             current_user_index = user_index
             user_found = True
             break
-
     if not user_found:
-        my_list.append(user_name)
-        main_list.append(my_list)
+        my_list.append(user_name)  # Creates new user.
+        main_list.append(my_list)  # New user nested to main_list.
         current_user_index = (len(main_list) - 1)
 
 
+# This function writes main_list back tot data.txt in a structured manner.
+# The first element of a nested list has an # added in front of it to recognize it as an user name.
+# All elements have a newline added to them. When all elements have been written, a % sign is added.
+# In this manner it will loop through all elements of all nested lists.
 def write():
     with open('data.txt', 'w+') as file:
         if not file.closed:
@@ -75,6 +77,7 @@ def write():
             print("cant write in file!!")
 
 
+# print_menu() displays the main menu and lets you start different functions.
 def print_menu():
     print("\n      **** Main menu ****\nChoose one of the following options:\n")
     print("  1 - Print list\n  2 - Add to list\n  3 - Delete from list")
@@ -97,6 +100,7 @@ def print_menu():
         exit()
 
 
+# This function displays the items stored in an user list, sorted by date.
 def print_list():
     if len(my_list) > 0:
         for i in sorted(my_list):
@@ -111,6 +115,7 @@ def print_list():
         exit("Invalid choice, quitting....")
 
 
+# This function adds items to an user list (my_list).
 def add_item():
     print("      **** Add Item ****")
     item = input("Enter an item to add to your list.\nStart with the date YYYY-MM-DD followed by a whitespace: ")
@@ -119,6 +124,7 @@ def add_item():
     print_menu()
 
 
+# delete_item prints out an user list with indexing. The index can be used to select an item to delete.
 def delete_item():
     print("     **** Delete Item ****\nSelect an index number to delete: ")
     if len(my_list) > 0:
@@ -132,6 +138,8 @@ def delete_item():
         print_menu()
 
 
+# This function updates changes made in the user list(my_list) to main_list. Which is stored in data.txt.
+# Upon exit, write() is called, that's when main_list is written to file.
 def save_list():
     print("Saving the list....")
     main_list[current_user_index] = my_list
@@ -139,6 +147,7 @@ def save_list():
 
 
 ######################################
+# Simple calculator, returns floats.
 operators = {
     '+': add,
     '-': sub,
@@ -158,14 +167,13 @@ def calculate(s):
 
 
 def calculator():
-    calc = input("**** CALCULATOR ****\nType calculation:\n")
+    calc = input("**** WHOLE NUMBER CALCULATOR ****\n     returns decimals\nType calculation:\n")
     print("Answer: " + str(calculate(calc)))
     print_menu()
-
-
 ##################################
 
-read()
+
+read()  # First function to be called.
 find_userlist()
 print_menu()
 write()
