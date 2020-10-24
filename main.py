@@ -23,7 +23,7 @@ def read():
         if not file.closed:
             for item in file:
                 if item.startswith('#'):
-                    item = item[1:][:-1]
+                    item = item[1:][:-1]  # Remove hashtag before storing in user_list
                     user_list.append(item)
                 elif item.startswith('%'):
                     main_list.append(user_list.copy())
