@@ -1,12 +1,14 @@
 #Adrian
-kat
-hond
-cavia
-muis
-vleermuis
+2020-10-25 kat scheren
+2020-06-22 hond uitlaten
+2020-03-05 cavia masseren
+2021-01-01 muis voeren
+2019-05-19 vleermuis wassen
+2021-02-23 beefcake eten
+2020-10-23 Walk the dog
 %
 #Noortje
-pinguins
-paarden
-bijen
+2018-10-10 pinguins uitlaten
+2020-05-09 paarden kammen
+2020-06-06 bijen melken
 %
